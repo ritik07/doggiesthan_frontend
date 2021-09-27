@@ -1,0 +1,353 @@
+@import './padding.css';
+@import './margin.css';
+@import './font.css';
+@import './color.css';
+@import './margin.css';
+@import './button.css';
+@import './antdoverright.css';
+@import './web/home.css';
+@import './web/product.css';
+@import './mobile/Footer.css';
+@import './web/category.css';
+@import './web/cart.css';
+
+div{
+  color: #000;
+}
+
+.cs-web-container{
+  margin: 0px 40px;
+}
+
+.cs-web-container-70{
+  margin: 0px 70px;
+}
+
+.cs-mobile-container{
+  margin: 0px 6px;
+}
+
+.cs-web-container-110{
+  margin: 0px 110px;
+}
+
+.cs-fix-it{
+  position: -webkit-sticky;
+  position: sticky;
+  top: 150px;
+}
+
+.cs-hrz-divion{
+  height: 2px;
+  background-color: #000;
+  width: 100%;
+}
+
+.cs-hrz-divion-light{
+  height: 1px;
+  background-color: rgba(124, 124, 124, 0.226);
+  width: 100%; 
+}
+
+.cs-vt-center{
+  align-content:center;
+  align-items: center;
+}
+
+.cs-dis-flex{
+  display: flex !important;
+}
+
+.cs-hrz-center{
+  justify-content: center;
+  justify-items: center;
+}
+
+.cs-abs-center{
+  left: 50%;
+  transform: translate(-50%, 0);
+  top: 50%;
+  transform: translate(-50%,-50%);
+}
+
+.cs-justify-sb{
+  justify-content: space-between;
+}
+
+.cs-justify-se{
+  justify-content: space-evenly;
+}
+
+.cs-dis-block{
+  display: block;
+}
+
+.subscribe-input{
+  background-color: #00937800;
+  margin-top: 15px;
+  border-color: #009378;
+  border-radius: 6px;
+  height: 35px;
+}
+
+.subscribe-input:focus{
+  border-color: #009378;
+}
+
+.subscribe-input:hover{
+  border-color: #009378;
+}
+
+
+.subscribe-input::placeholder{
+  color: rgba(0, 0, 0, 0.637);
+}
+
+.cs-font-caps{
+  text-transform: uppercase;
+}
+
+.cs-br-5{
+  border-radius: 5px;
+}
+
+.cs-br-8{
+  border-radius: 8px;
+}
+
+.cs-br-12{
+  border-radius: 12px;
+}
+
+.cs-br-15{
+  border-radius: 15px;
+}
+
+.cs-br-18{
+  border-radius: 18px;
+}
+
+.cs-pointer{
+  cursor: pointer;
+}
+
+.cs-overflow-x-scroll{
+  overflow-x: scroll;
+}
+
+.cs-dis-none{
+  display: none;
+}
+
+.cs-font-italic{
+  font-style: italic;
+}
+
+.cs-vt-line{
+  border: rgba(0, 0, 0, 0.514);
+  border-style: solid;
+  border-width: 0px 2px 0px 0px;
+}
+
+.cs-vt-line-header{
+  border: rgba(0, 0, 0, 0.226);
+  border-style: solid;
+  border-width: 0px 1px 0px 0px;
+}
+
+.cs-w-50{
+  width: 50% !important;
+}
+
+.cs-w-60{
+  width: 60% !important;
+}
+
+.cs-w-70{
+  width: 70% !important;
+}
+
+.cs-w-75{
+  width: 75% !important;
+}
+
+.cs-w-80{
+  width: 80% !important;
+}
+.cs-cross-icon{
+  height: 18px;
+  width: 18px;
+  color: #fff;
+  background-color: #37bead;
+  border-radius: 50%;
+}
+
+.cs-w-100{
+  width: 100% !important;
+}
+
+.cs-w-40p{
+  width: 40px;
+}
+
+.cs-pos-abs{
+  position: absolute;
+}
+
+.cs-float-left{
+  float: left;
+}
+
+.cs-float-right{
+  float: right;
+}
+
+/* WEB VIEW */
+@media screen and (min-width: 768px) {
+
+  .cs-show-mobile {
+    display: none;
+  }
+
+  .cs-show-web {
+    display: block;
+  }
+
+}
+
+/* TAB VIEW */
+/* No greater than 992px, no less than 768px */
+@media screen and (min-width:768px) and (max-width:991px){
+  .cs-show-mobile {
+    display: none;
+  }
+
+  .cs-show-web {
+    display: block;
+  }
+
+  .cs-show-lg-tab {
+    display: none;
+  }
+
+  .cs-hide-lg-tab{
+    display: block;
+  }
+}
+
+ /*LG */ 
+@media screen and (min-width:992px) and (max-width:1200px){
+  .cs-show-lg-tab {
+    display: block;
+  }
+
+  .cs-hide-lg-tab{
+    display: none;
+  }
+}
+
+/* MD */
+@media screen and (min-width:768px) and (max-width:992px){
+  .cs-show-md-tab {
+    display: block;
+  }
+
+  .cs-hide-md-tab{
+    display: none;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .cs-show-mobile {
+    display: block;
+  }
+
+  .cs-show-web {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 600px) { 
+  .cs-web-container{
+    margin: 0px 20px;
+  }
+}
+ 
+.ant-menu-title-content{
+  color: #000 !important;
+  font-size: 15px !important;
+  font-weight: 400px !important;
+}
+/* Extra small devices (phones, 600px and down) */
+/* @media only screen and (max-width: 600px) {
+  .cs-not-for-mobile{
+    display: none !important;
+  }
+  .cs-center-vertical-mobile{
+    display: flex;
+    align-items: center;
+    align-content: center;
+  }
+  .cs-get-ticket-container{
+    padding: 20px 20px;
+  }
+  .cs-web-container{
+    padding: 0px 15px;
+  }
+  .cs-xs-bp-20{
+    padding-bottom: 20px;
+  }
+  .cs-only-for-mobile{
+    display: flex !important ;
+  }
+  .cs-mobile-logo{
+    float: right;
+    margin-top: 12px;
+  }
+} */
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+/* @media only screen and (min-width: 768px) and (max-width: 1199px) {
+  .cs-not-for-mobile{
+    display: none !important;
+  }
+  .cs-only-for-mobile{
+    display: flex !important ;
+  }
+
+} */
+
+/* @media screen and (min-width:768px) and (max-width:992px){
+  .cs-not-for-mobile{
+    display: none !important;
+  }
+  .cs-only-for-mobile{
+    display: flex !important ;
+  }
+} */
+
+/* No greater than 992px, no less than 1200px */
+/* @media screen and (min-width:992px) and (max-width:1200px){
+  .cs-not-for-mobile{
+    display: none !important;
+  }
+  .cs-only-for-mobile{
+    display: flex !important ;
+  }
+}
+
+.cs-not-for-mobile{
+  display: content !important;
+}
+.cs-only-for-mobile{
+  display: none;
+} */
+
+/* Medium devices (landscape tablets, 768px and up) */
+/* @media only screen and (min-width: 768px) {...} */
+
+/* Large devices (laptops/desktops, 992px and up) */
+/* @media only screen and (min-width: 992px) {...} */
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+/* @media only screen and (min-width: 1200px) {...} */
