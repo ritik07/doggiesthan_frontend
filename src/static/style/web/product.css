@@ -1,0 +1,71 @@
+.cs-product-card{
+    border: 1px solid rgba(0,0,0,.1);
+    border-radius: 8px;
+}
+
+.cs-product-card:hover{
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.cs-product-card-cat-txt{
+    font-size: 14px;
+    text-align: center;
+}
+
+.cs-product-card-prod-name-txt{
+    font-size: 26px;
+}
+
+.cs-product-card-name:hover{
+    color: #fc9066;
+}
+
+.cs-product-card-info{
+    padding: 12px 12px 8px 12px;
+}
+
+/* 
+.cs-product-card-rating{
+    background-color: ;
+} */
+
+.cs-product-card-mrp{
+    color: rgba(0, 0, 0, 0.39);
+    text-decoration: line-through;
+}
+
+.cs-product-card-pricing-section{
+    justify-content: center;
+    justify-items: center;
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+}
+
+.cs-product-card-addtocart{
+    background-color: #fc9066;
+    color: #fff;
+    border-radius: 18px;
+    padding: 8px 12px;
+}
+
+.cs-divider-line{
+    background-color: rgba(0, 0, 0, 0.164);
+    width: 100%;
+    height: 1px;
+}
+
+.cs-product-card-rate{
+    font-size: 16px;
+}
+
+@media only screen and (max-width: 600px) { 
+    .cs-product-card-prod-name-txt{
+        font-size: 20px;
+        text-align: center;
+    }
+
+    .cs-product-card-rate{
+        font-size: 14px;
+    }
+}
