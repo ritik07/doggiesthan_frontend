@@ -1,0 +1,40 @@
+{
+  "files": {
+    "main.css": "/static/css/main.968e4156.chunk.css",
+    "main.js": "/static/js/main.3c766b9f.chunk.js",
+    "main.js.map": "/static/js/main.3c766b9f.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.302abf76.js",
+    "runtime-main.js.map": "/static/js/runtime-main.302abf76.js.map",
+    "static/css/2.ea8cb931.chunk.css": "/static/css/2.ea8cb931.chunk.css",
+    "static/js/2.9ac3178e.chunk.js": "/static/js/2.9ac3178e.chunk.js",
+    "static/js/2.9ac3178e.chunk.js.map": "/static/js/2.9ac3178e.chunk.js.map",
+    "static/js/3.fac1ee9e.chunk.js": "/static/js/3.fac1ee9e.chunk.js",
+    "static/js/3.fac1ee9e.chunk.js.map": "/static/js/3.fac1ee9e.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/2.ea8cb931.chunk.css.map": "/static/css/2.ea8cb931.chunk.css.map",
+    "static/css/main.968e4156.chunk.css.map": "/static/css/main.968e4156.chunk.css.map",
+    "static/js/2.9ac3178e.chunk.js.LICENSE.txt": "/static/js/2.9ac3178e.chunk.js.LICENSE.txt",
+    "static/media/style.css": "/static/media/Butler.99c7b1a6.woff2",
+    "static/media/DMMS-blue.12d3c5bd.png": "/static/media/DMMS-blue.12d3c5bd.png",
+    "static/media/background_footer.e9cd3940.jpg": "/static/media/background_footer.e9cd3940.jpg",
+    "static/media/bg_back_color.ea57a144.jpeg": "/static/media/bg_back_color.ea57a144.jpeg",
+    "static/media/catdog.c4db7940.png": "/static/media/catdog.c4db7940.png",
+    "static/media/finaltemplate.027900e1.png": "/static/media/finaltemplate.027900e1.png",
+    "static/media/footer-top.34e26a3c.png": "/static/media/footer-top.34e26a3c.png",
+    "static/media/hero_prices.c5c8bb3d.png": "/static/media/hero_prices.c5c8bb3d.png",
+    "static/media/logo.b400604c.jpeg": "/static/media/logo.b400604c.jpeg",
+    "static/media/product1.1455ff20.jpg": "/static/media/product1.1455ff20.jpg",
+    "static/media/product4.509308a7.jpg": "/static/media/product4.509308a7.jpg",
+    "static/media/sldierimg1.f344bb75.jpg": "/static/media/sldierimg1.f344bb75.jpg",
+    "static/media/slick-theme.css": "/static/media/slick.c94f7671.ttf",
+    "static/media/sliderimg.d3834a0a.png": "/static/media/sliderimg.d3834a0a.png",
+    "static/media/sliderimg2.4f0fb005.jpg": "/static/media/sliderimg2.4f0fb005.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.302abf76.js",
+    "static/css/2.ea8cb931.chunk.css",
+    "static/js/2.9ac3178e.chunk.js",
+    "static/css/main.968e4156.chunk.css",
+    "static/js/main.3c766b9f.chunk.js"
+  ]
+}

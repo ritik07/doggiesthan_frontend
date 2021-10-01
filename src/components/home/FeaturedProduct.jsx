@@ -7,7 +7,7 @@ import Product3 from '../../static/images/products/product3.jpg'
 import Product4 from '../../static/images/products/product4.jpg'
 
 
-const FeaturedProduct = () => {
+const FeaturedProduct = ({history}) => {
 
 
 
@@ -60,7 +60,7 @@ const FeaturedProduct = () => {
         </div>
         </div>
 
-        <ProductCard bestDeals={bestDeals} />
+        <ProductCard bestDeals={bestDeals} history={history}/>
 
       </div>
     </div>

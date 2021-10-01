@@ -18,7 +18,7 @@ import ProductCard from '../productcard'
 
 const { SubMenu } = Menu;
 
-const Category = () => {
+const Category = ({history}) => {
   const { Option } = Select;
   const categoryData = [
     {
@@ -111,26 +111,32 @@ const Category = () => {
   }
 
   return (
-    <div className="cs-web-container cs-tp-60">
+    <div className="cs-web-container cs-tp-60 cs-bp-100">
       <Row>
 
-        <Col xl={3}>
+        <Col xl={3} xs={12} sm={12}>
           <div className="cs-fix-it">
 
             <div className="cs-font-instyle cs-font-24 cs-bp-25">
               Product Category
-          </div>
+            </div>
             <Menu
-              style={{ width: 256 }}
               defaultSelectedKeys={['1']}
-              defaultOpenKeys={['sub1']}
+              defaultOpenKeys={['sub1', 'sub1-2', 'sub1-4', 'sub2', 'sub3', 'sub1-4']}
               mode="inline">
               <SubMenu key="sub1" title="Dogs">
                 <SubMenu key="sub1-2" title="Food">
                   <Menu.Item key="5">Dry Food</Menu.Item>
                   <Menu.Item key="6">Wet Food</Menu.Item>
                 </SubMenu>
+
+                <SubMenu key="sub1-4" title="Toys">
+                  <Menu.Item key="55">Soft Toys</Menu.Item>
+                  <Menu.Item key="66">Hard Toys</Menu.Item>
               </SubMenu>
+              </SubMenu>
+
+              
               <SubMenu key="sub2" title="Cats">
                 <SubMenu key="sub1-4" title="Food">
                   <Menu.Item key="7">Dry Food</Menu.Item>
@@ -139,20 +145,32 @@ const Category = () => {
               </SubMenu>
             </Menu>
 
-            <SideCart cartData={cartData} />
+            {/* <SideCart cartData={cartData} /> */}
           </div>
         </Col>
 
         <Col xl={9}>
-          <div className="cs-bp-25">
-            <Select className="cs-cat-def-sorting" defaultValue="Default Sorting"
-              style={{ width: 200 }} onChange={handleChange} size="large">
+          <div className="cs-dis-flex">
+          <div className="cs-bp-25 cs-tp-20 cs-rp-20">
+            <Select className="cs-cat-def-sorting" placeholder="Filter by price"
+              style={{ width: 150 }} onChange={handleChange} size="large">
               <Option value="jack">A-Z</Option>
               <Option value="lucy">Low to High Price</Option>
               <Option value="Yiminghe">High to Low Price</Option>
             </Select>
           </div>
-          <ProductCard bestDeals={bestDeals} gridXl={4} gridMd={4} gridLg={3} />
+
+          <div className="cs-bp-25 cs-tp-20">
+            <Select className="cs-cat-def-sorting" placeholder="Filter by brand"
+              style={{ width: 150 }} onChange={handleChange} size="large">
+              <Option value="jack">Puma</Option>
+              <Option value="lucy">Addidas</Option>
+              <Option value="Yiminghe">Nike</Option>
+            </Select>
+          </div>
+          
+          </div>
+          <ProductCard bestDeals={bestDeals} gridXl={4} gridMd={4} gridLg={3} history={history} isGrid={true}/>
         </Col>
       </Row>
 

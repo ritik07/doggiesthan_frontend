@@ -2,15 +2,15 @@ import React from 'react'
 import MobileFooter from './MobileFooter'
 import WebFooter from './WebFooter'
 
-const Footer = () => {
+const Footer = ({history}) => {
   return (
     <div>
       <div className="cs-show-web">
-        <WebFooter />
+        <WebFooter history={history}/>
       </div>
 
       <div className="cs-show-mobile">
-        <MobileFooter />
+        <MobileFooter history={history}/>
       </div>
     </div>
   )

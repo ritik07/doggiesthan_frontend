@@ -4,7 +4,7 @@ import CategoryComp from '../../components/category/index'
 const Category = ({ history }) => {
   return (
     <AppController history={history}>
-      <CategoryComp />
+      <CategoryComp history={history}/>
     </AppController>
   )
 }

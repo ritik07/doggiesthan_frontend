@@ -3,3 +3,10 @@
     color: #fff;
     font-weight: 600 !important;
 }
+
+.cs-btn-proceed-chkout{
+    padding: 10px 15px;
+    border-radius: 10px;
+    background-color: #1eacbd;
+    color: #fff;
+}

@@ -1,5 +1,6 @@
 import React from 'react'
 import { Table, Tag, Space, Input, Button } from 'antd';
+import { Row, Col } from "react-bootstrap"
 
 const columns = [
   {
@@ -45,14 +46,14 @@ const data = [
   },
 ];
 
-const CartTable = () => {
+const CartTable = ({ history }) => {
   return (
     <div>
       <div>
         <div>
           <div className="cs-font-instyle cs-font-24 cs-bp-20">
             Shopping Cart
-        </div>
+          </div>
           <Table className="cs-cart-table" columns={columns} dataSource={data} pagination={false} />
         </div>
 
@@ -61,7 +62,7 @@ const CartTable = () => {
 
           <Button type="primary" className="cs-lp-20">
             Apply
-        </Button>
+          </Button>
         </div>
       </div>
 
@@ -70,37 +71,52 @@ const CartTable = () => {
       </div>
 
       <div className="cs-hrz-divion" />
-      <div className="cs-dis-flex cs-justify-sb cs-lp-10 cs-rp-10 cs-tp-20 cs-bp-20">
-        <div>
+      <Row className="cs-tp-20 cs-bp-20">
+        <Col xl={6}>
           Subtotal
-        </div>
-        <div>
-          (Free Shipping)
-        </div>
-        <div>
+        </Col>
+        <Col xl={6}>
           Rs 132
-        </div>
-      </div>
-
-      <div>
-        <div className="cs-dis-flex cs-justify-sb cs-lp-10 cs-rp-10 cs-tp-20 cs-bp-20">
-          <div>
-            Shipping Address
-          </div>
-
-          <div className="cs-hrz-divion-light" />
-
-          <div style={{ width: 200 }}>
-            Shipping to Victoria asdsd d sadasd dsad asdsa ddsa sadasdsad das.
-            <br />
-            <span className="cs-clr-cream">
-              Change Address
-            </span>
-          </div>
-        </div>
-      </div>
+        </Col>
+      </Row>
 
       <div className="cs-hrz-divion-light" />
+
+      <Row className="cs-tp-20 cs-bp-20">
+        <Col xl={6}>
+          Shipping Address
+        </Col>
+        <Col xl={6}>
+          <div className="cs-bp-10">
+            (Free Shipping)
+          </div>
+          <div className="cs-bp-10">
+            Shipping to Victoria asdsd d sadasd dsad asdsa ddsa sadasdsad das.
+          </div>
+          <div className="cs-clr-cream">
+            Change Address
+          </div>
+        </Col>
+      </Row>
+
+      <div className="cs-hrz-divion-light" />
+
+      <Row className="cs-tp-20 cs-bp-20">
+        <Col xl={6} className="cs-fw-700 cs-font-20">
+          Total
+        </Col>
+        <Col xl={6} className="cs-fw-700 cs-font-20">
+          Rs 132
+        </Col>
+      </Row>
+
+      <div className="cs-hrz-divion-bold" />
+
+      <div className="cs-dis-flex cs-hrz-center cs-tp-20 cs-pointer">
+        <div className="cs-btn-proceed-chkout" onClick={() => history.push("/checkout")}>
+          PROCEED TO CHECKOUT
+        </div>
+      </div>
     </div>
   )
 }

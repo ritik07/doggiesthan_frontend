@@ -2,6 +2,7 @@ import React from 'react'
 import { Row, Col } from 'reactstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
+import logo from '../../static/images/icons/logo.jpeg'
 
 const MobileHeader = () => {
   return (
@@ -11,10 +12,14 @@ const MobileHeader = () => {
         width: "100%", backgroundColor: "#1eacbd", zIndex: 5
       }}>
         <Row>
-          <Col xs={10} className="cs-dis-flex cs-vt-center">
+          <Col xs={6} className="cs-dis-flex cs-vt-center">
+            {/* <img src={logo} className="cs-w-100" /> */}
             <div className="cs-font-instyle cs-clr-fff cs-font-26">
               Doggiesthan
-          </div>
+            </div>
+          </Col>
+
+          <Col xs={4} className="cs-dis-flex cs-vt-center">
           </Col>
 
           <Col xs={2} className="cs-dis-flex cs-vt-center">
@@ -28,3 +33,4 @@ const MobileHeader = () => {
 }
 
 export default MobileHeader
+

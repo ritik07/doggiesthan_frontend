@@ -3,7 +3,7 @@ import { Row, Col } from 'reactstrap'
 import { Rate } from 'antd';
 
 const ProductCardWeb = (props) => {
-  const { gridMd, gridXl, gridLg } = props
+  const { gridMd, gridXl, gridLg, history } = props
   return (
     <Row>
       {props.bestDeals.map((data) => {
@@ -49,10 +49,10 @@ const ProductCardWeb = (props) => {
                 </div>
               </div>
 
-              <div className="cs-dis-flex cs-hrz-center cs-tp-15 cs-bp-20">
+              <div className="cs-dis-flex cs-hrz-center cs-tp-15 cs-bp-20" onClick={()=>history.push("/cart")}>
                 <div className="cs-product-card-addtocart cs-pointer">
                   Add to Cart
-                  </div>
+                </div>
               </div>
             </div>
           </Col>)

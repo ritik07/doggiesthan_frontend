@@ -63,7 +63,7 @@ const Category = ({ history }) => {
           </div>
         </div>
 
-        <ProductCard bestDeals={bestDeals} />
+        <ProductCard bestDeals={bestDeals} history={history}/>
 
       </div>
     </div>

@@ -58,7 +58,7 @@ export const AppController = ({ history, children }) => {
             >
               {children}
             </Content>
-            <Footer />
+            <Footer history={history} />
           </Layout>
         </Layout>
       </div>
@@ -87,7 +87,7 @@ export const AppController = ({ history, children }) => {
             </Content>
           </Layout>
           {/* for mobile */}
-          <Footer />
+          <Footer history={history}/>
         </Layout>
       </div>
     </div>

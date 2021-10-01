@@ -6,7 +6,7 @@ export const Cart = ({ history }) => {
   return (
     <div>
       <AppController history={history}>
-        <CartComp />
+        <CartComp history={history}/>
       </AppController>
     </div>
   )

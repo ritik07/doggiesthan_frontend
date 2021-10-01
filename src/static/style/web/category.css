@@ -1,3 +1,13 @@
 .cs-cat-def-sorting .ant-select-selector{
     border-radius: 14px !important;
 }
+
+.cs-cover-image-curve{
+    margin-top: -125px;
+}
+
+@media screen and (max-width: 767px) {
+    .cs-cover-image-curve{
+        margin-top: -85px !important;
+    }    
+  }

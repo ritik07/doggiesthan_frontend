@@ -8,8 +8,8 @@ const WebHome = ({ history }) => {
   return (
     <div>
       <Banners />
-      <FeaturedBanner />
-      <FeaturedProduct />
+      <FeaturedBanner history={history}/>
+      <FeaturedProduct history={history}/>
       <Category history={history} />
     </div>
   )

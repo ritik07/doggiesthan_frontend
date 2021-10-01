@@ -54,19 +54,19 @@ export const WebHeader = ({ history }) => {
           </Col>
 
           <Col xl={1} lg={1} md={1} className="cs-vt-center cs-dis-flex">
-            <div className="cs-font-18 cs-fw-500 cs-lm-10">
+            <div className="cs-font-18 cs-fw-500 cs-lm-10 cs-pointer" onClick={() => history.push("/dogs")}>
               DOG
             </div>
           </Col>
 
           <Col xl={1} lg={1} md={1} className="cs-vt-center cs-dis-flex">
-            <div className="cs-font-18 cs-fw-500 cs-lm-10">
+            <div className="cs-font-18 cs-fw-500 cs-lm-10 cs-pointer" onClick={() => history.push("/cats")}>
               CAT
             </div>
           </Col>
 
           <Col xl={2} lg={1} md={1} className="cs-vt-center cs-dis-flex">
-            <div className="cs-font-18 cs-fw-500 cs-lm-10">
+            <div className="cs-font-18 cs-fw-500 cs-lm-10 cs-pointer" onClick={() => history.push("/bestdeals")}>
               TODAY'S DEAL
             </div>
           </Col>
@@ -85,13 +85,13 @@ export const WebHeader = ({ history }) => {
           </Col>
 
           <Col xl={1} lg={1} md={1} className="cs-vt-center cs-dis-flex">
-            <div className="cs-font-18 cs-fw-500 cs-lm-10">
+            <div className="cs-font-18 cs-fw-500 cs-lm-10 cs-pointer" onClick={() => history.push("/brands")}>
               BRANDS
             </div>
           </Col>
 
           <Col xl={1} lg={1} md={1} className="cs-vt-center cs-dis-flex">
-            <div className="cs-font-18 cs-fw-500 cs-lm-10">
+            <div className="cs-font-18 cs-fw-500 cs-lm-10 cs-pointer" onClick={() => history.push("/exclusive")}>
               EXCLUSIVE
             </div>
           </Col>
