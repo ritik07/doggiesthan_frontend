@@ -31,6 +31,8 @@ import Cats from "./pages/cat";
 import TodayDeal from "./pages/todaydeals";
 import Brands from "./pages/brands";
 import Exclusive from "./pages/exclusive";
+import Blogs from "./pages/blogs";
+import Rewards from "./pages/rewards";
 
 const App = () => {
   return (
@@ -50,6 +52,8 @@ const App = () => {
             <PublicRoute path="/bestdeals" component={TodayDeal} />
             <PublicRoute path="/brands" component={Brands} />
             <PublicRoute path="/exclusive" component={Exclusive} />
+            <PublicRoute path="/blogs" component={Blogs} />
+            <PublicRoute path="/rewards" component={Rewards} />
             <Redirect from="/" to="/home/" />
           </Switch>
         </Router>

@@ -49,6 +49,10 @@ div{
   width: 100%; 
 }
 
+.frz-br-8{
+  border-radius: 8pc;
+}
+
 .cs-hrz-divion-bold{
   height: 3px;
   background-color: #000;

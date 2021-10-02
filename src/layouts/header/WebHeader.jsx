@@ -103,8 +103,8 @@ export const WebHeader = ({ history }) => {
           <Col xl={2} lg={4} md={4} className="cs-h-v-center">
             <Row>
 
-              <Col xl={4} lg={4} md={3}>
-                <Badge count={5} style={{ backgroundColor: "#37bead" }} offset={[0, 0]}>
+              <Col xl={4} lg={4} md={3} onClick={() => history.push("/rewards")}>
+                <Badge count={500} style={{ backgroundColor: "#37bead" }} offset={[0, 0]}>
                   <img src={Reward} style={{ width: 35, height: 35 }} />
                 </Badge>
               </Col>

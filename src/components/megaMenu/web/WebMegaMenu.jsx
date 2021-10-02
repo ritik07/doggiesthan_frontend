@@ -59,7 +59,14 @@ const menu = <div className="menu-popover">
   </div>
 </div>;
 
-const getForPc = () => {
+const services = <div className="menu-popover">
+  <div>
+    <div className="cs-fw-500 cs-font-16 cs-bm-10 cs-pointer">Grooming</div>
+    <div className="cs-fw-500 cs-font-16 cs-bm-10 cs-pointer">Hostel</div>
+  </div>
+</div>;
+
+const getForPc = (history) => {
   return (
     <div>
       <div className="mega-menu-wrapper">
@@ -73,20 +80,22 @@ const getForPc = () => {
             </li>
           </Popover>
 
-          <li className="menu-li">
-            <div className="cs-dis-flex">
-              <div className="cs-clr-fff cs-fw-600">Services</div>
-              <div className="cs-vt-center cs-dis-flex cs-clr-fff"><CaretDownOutlined /></div>
-            </div>
-          </li>
+          <Popover content={services} placement="bottomLeft">
+            <li className="menu-li">
+              <div className="cs-dis-flex">
+                <div className="cs-clr-fff cs-fw-600">Services</div>
+                <div className="cs-vt-center cs-dis-flex cs-clr-fff"><CaretDownOutlined /></div>
+              </div>
+            </li>
+          </Popover>
 
-          <li className="menu-li">
+          <li className="menu-li" onClick={() => history.push("/brands")}>
             <div className="cs-dis-flex">
               <div className="cs-clr-fff cs-fw-600">All Brands</div>
             </div>
           </li>
 
-          <li className="menu-li">
+          <li className="menu-li" onClick={() => history.push("/blogs")}>
             <div className="cs-dis-flex">
               <div className="cs-clr-fff cs-fw-600">Blogs</div>
             </div>
