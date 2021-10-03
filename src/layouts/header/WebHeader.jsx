@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from 'react'
 import { SearchOutlined, ShoppingCartOutlined, UserOutlined } from '@ant-design/icons';
-import { Button, Input, Popover, Menu, Badge, Avatar } from "antd";
+import { Input, Menu, Badge } from "antd";
 import { Row, Col } from 'reactstrap'
 import "./style.css";
 import Reward from '../../static/images/icons/reward.png'
 import logo from '../../static/images/icons/logo.jpeg'
+import { useDispatch, useSelector } from 'react-redux'
 
 const { SubMenu } = Menu;
 
@@ -18,6 +19,20 @@ const menu = (
 
 
 export const WebHeader = ({ history }) => {
+
+  const [data, setData] = useState([]);
+  const [totalCartItem, setTotalCartItem] = useState(false)
+
+  const allData = useSelector(state => state.allData);
+
+  useEffect(() => {
+    if (allData.completeData.length) {
+      setData(allData.completeData)
+    }
+    if (allData.userCart.length) {
+      setTotalCartItem(allData.userCart.length)
+    }
+  }, [allData])
 
   const [searchText, setSearchText] = useState("")
   const [isFocus, setIsFocus] = useState(false)
@@ -46,6 +61,7 @@ export const WebHeader = ({ history }) => {
 
   return (
     <div className="cs-web-container">
+      {console.log("data", data)}
       <div className="cs-web-navbar">
         <Row>
           <Col xl={1} lg={1} md={1} className="cs-vt-center cs-dis-flex">
@@ -53,7 +69,19 @@ export const WebHeader = ({ history }) => {
             <SearchOutlined style={{ fontSize: 22 }} />
           </Col>
 
-          <Col xl={1} lg={1} md={1} className="cs-vt-center cs-dis-flex">
+          {data.map((data, index) => {
+            if (index <= 1) {
+              return (
+                <Col xl={1} lg={1} md={1} className="cs-vt-center cs-dis-flex">
+                  <div className="cs-font-18 cs-fw-500 cs-lm-10 cs-pointer" onClick={() => history.push(`/${data.title}/${data.id}`)}>
+                    {data.title}
+                  </div>
+                </Col>
+              )
+            }
+          })}
+
+          {/* <Col xl={1} lg={1} md={1} className="cs-vt-center cs-dis-flex">
             <div className="cs-font-18 cs-fw-500 cs-lm-10 cs-pointer" onClick={() => history.push("/dogs")}>
               DOG
             </div>
@@ -63,7 +91,7 @@ export const WebHeader = ({ history }) => {
             <div className="cs-font-18 cs-fw-500 cs-lm-10 cs-pointer" onClick={() => history.push("/cats")}>
               CAT
             </div>
-          </Col>
+          </Col> */}
 
           <Col xl={2} lg={1} md={1} className="cs-vt-center cs-dis-flex">
             <div className="cs-font-18 cs-fw-500 cs-lm-10 cs-pointer" onClick={() => history.push("/bestdeals")}>
@@ -114,7 +142,7 @@ export const WebHeader = ({ history }) => {
               </Col>
 
               <Col xl={3} lg={3} md={3} onClick={() => history.push("/cart")} className="cs-pointer">
-                <Badge count={5} style={{ backgroundColor: "#37bead" }} offset={[0, 0]}>
+                <Badge count={totalCartItem} style={{ backgroundColor: "#37bead" }} offset={[0, 0]}>
                   <ShoppingCartOutlined style={{ fontSize: 35 }} />
                 </Badge>
                 {/* <ShoppingCartOutlined style={{ fontSize: 35 }} /> */}

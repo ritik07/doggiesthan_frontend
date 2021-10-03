@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Table, Tag, Space, Input, Button } from 'antd';
 import { Row, Col } from "react-bootstrap"
+import { useDispatch, useSelector } from 'react-redux'
 
 const columns = [
   {
@@ -16,13 +17,18 @@ const columns = [
   },
   {
     title: 'Quantity',
-    dataIndex: 'qty',
-    key: 'qty',
+    dataIndex: 'quantity',
+    key: 'quantity',
   },
   {
     title: 'Subtotal',
-    dataIndex: 'subtotal',
-    key: 'subtotal',
+    dataIndex: '',
+    key: '',
+    render: (data) => (
+      <div>
+        {(+data.price) * (+data.quantity)}
+      </div>
+    ),
   },
   // {
   //   title: 'Action',
@@ -36,17 +42,51 @@ const columns = [
   // },
 ];
 
-const data = [
-  {
-    key: '1',
-    name: 'Bella Soft Toy',
-    price: 132,
-    qty: 1,
-    subtotal: 132
-  },
-];
-
 const CartTable = ({ history }) => {
+  const [data, setData] = useState(false);
+  const [subTotal, setSubTotal] = useState(false)
+  const allData = useSelector(state => state.allData);
+
+  useEffect(() => {
+    getTableData()
+  }, [allData])
+
+  useEffect(() => {
+    if (data) {
+      getSubTotal()
+    }
+  }, [data])
+
+  const getSubTotal = () => {
+    let tempTotal = [];
+    data.map((data) => {
+      tempTotal.push(data.subtotal)
+    })
+    const reducer = (previousValue, currentValue) => previousValue + currentValue;
+    let finalTotal = tempTotal.reduce(reducer)
+    setSubTotal(finalTotal)
+
+  }
+
+  const getTableData = () => {
+    let tempProduct = []
+    if (allData.userCart.length) {
+      if (allData.products.length) {
+        allData.products.map((prodData, index) => {
+          prodData.price = +prodData.price
+          return allData.userCart.map((cartData, cartindex) => {
+            if (prodData.id === cartData.productId) {
+              cartData.quantity = +cartData.quantity
+              cartData.subtotal = cartData.quantity * prodData.price
+              return tempProduct.push({ ...prodData, ...cartData })
+            }
+          })
+        })
+      }
+      setData(tempProduct)
+    }
+  }
+
   return (
     <div>
       <div>
@@ -76,13 +116,13 @@ const CartTable = ({ history }) => {
           Subtotal
         </Col>
         <Col xl={6}>
-          Rs 132
+          Rs {subTotal} (Free Shipping)
         </Col>
       </Row>
 
       <div className="cs-hrz-divion-light" />
 
-      <Row className="cs-tp-20 cs-bp-20">
+      {/* <Row className="cs-tp-20 cs-bp-20">
         <Col xl={6}>
           Shipping Address
         </Col>
@@ -97,7 +137,7 @@ const CartTable = ({ history }) => {
             Change Address
           </div>
         </Col>
-      </Row>
+      </Row> */}
 
       <div className="cs-hrz-divion-light" />
 
@@ -106,7 +146,7 @@ const CartTable = ({ history }) => {
           Total
         </Col>
         <Col xl={6} className="cs-fw-700 cs-font-20">
-          Rs 132
+          Rs {subTotal}
         </Col>
       </Row>
 

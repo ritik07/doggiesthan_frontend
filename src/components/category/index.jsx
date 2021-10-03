@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Row, Col } from 'react-bootstrap'
 import Product1 from '../../static/images/products/product1.jpg'
 import Product2 from '../../static/images/products/product2.jpg'
@@ -15,97 +15,24 @@ import {
 } from '@ant-design/icons';
 import ProductCard from '../productcard'
 import { isMobile } from 'react-device-detect'
-
+import { useDispatch, useSelector } from 'react-redux'
+import { ImageUrl } from '../../lib/constant'
 
 const { SubMenu } = Menu;
 
 const Category = ({ history }) => {
   const { Option } = Select;
-  const categoryData = [
-    {
-      img: Product1,
-      parent: "Toys",
-      catName: "Hard Toys",
-      descp: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus quo consequatur...",
-    },
-    {
-      img: Product2,
-      parent: "Toys",
-      catName: "Soft Toys",
-      descp: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus quo consequatur...",
-    },
-    {
-      img: Product3,
-      parent: "Dog Food",
-      catName: "Wet Food",
-      descp: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus quo consequatur...",
-    },
-    {
-      img: Product4,
-      parent: "Dog Food",
-      catName: "Dry Food",
-      descp: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus quo consequatur...",
-    }]
 
+  const [data, setData] = useState([]);
+  const [product, setProduct] = useState([])
 
-  const cartData = [
-    {
-      img: Product1,
-      name: "Bella Bowl",
-      qty: 4,
-      sp: 140,
-    },
-    {
-      img: Product2,
-      name: "Bella Bowl",
-      qty: 8,
-      sp: 180,
-    },
-    {
-      img: Product4,
-      name: "Bella Bowl",
-      qty: 1,
-      sp: 80,
-    }]
+  const allData = useSelector(state => state.allData);
 
-  const bestDeals = [
-    {
-      img: Product1,
-      name: "Chew Ball",
-      descp: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus quo consequatur...",
-      mrp: 4500,
-      sp: 3500,
-      rating: 3.5,
-      category: "Toys"
-    },
-    {
-      img: Product2,
-      name: "Cookie Bones",
-      descp: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus quo consequatur...",
-      mrp: 25,
-      sp: 15,
-      rating: 3,
-      category: "Food"
-    },
-    {
-      img: Product3,
-      name: "Crate Mats",
-      descp: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus quo consequatur...",
-      mrp: 800,
-      sp: 550,
-      rating: 5,
-      category: "Beds"
-    },
-    {
-      img: Product4,
-      name: "Dry Food",
-      descp: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus quo consequatur...",
-      mrp: 999,
-      sp: 599,
-      rating: 3.5,
-      category: "Food"
+  useEffect(() => {
+    if (allData.completeData.length) {
+      setData(allData.completeData)
     }
-  ]
+  }, [allData])
 
   function handleChange(value) {
     console.log(`selected ${value}`);
@@ -125,27 +52,23 @@ const Category = ({ history }) => {
               defaultSelectedKeys={['1']}
               defaultOpenKeys={isMobile ? [] : ['sub1', 'sub1-2', 'sub1-4', 'sub2', 'sub3', 'sub1-4']}
               mode="inline">
-              <SubMenu key="sub1" title="Dogs">
-                <SubMenu key="sub1-2" title="Food">
-                  <Menu.Item key="5">Dry Food</Menu.Item>
-                  <Menu.Item key="6">Wet Food</Menu.Item>
-                </SubMenu>
-
-                <SubMenu key="sub1-4" title="Toys">
-                  <Menu.Item key="55">Soft Toys</Menu.Item>
-                  <Menu.Item key="66">Hard Toys</Menu.Item>
-                </SubMenu>
-              </SubMenu>
-
-
-              <SubMenu key="sub2" title="Cats">
-                <SubMenu key="sub1-4" title="Food">
-                  <Menu.Item key="7">Dry Food</Menu.Item>
-                  <Menu.Item key="8">Wet Food</Menu.Item>
-                </SubMenu>
-              </SubMenu>
+              {
+                data.map((data, index) =>
+                  <SubMenu key={data.id} title={data.title}>
+                    {data.children.map((catData, ind) => {
+                      return (
+                        <SubMenu key={catData.id} title={catData.title}>
+                          {catData.children.map(subCatData => (
+                            <Menu.Item key={subCatData.id} onClick={() => setProduct(subCatData.children)}>
+                              {subCatData.title}
+                            </Menu.Item>
+                          ))}
+                        </SubMenu>
+                      )
+                    })}
+                  </SubMenu>
+                )}
             </Menu>
-
             {/* <SideCart cartData={cartData} /> */}
           </div>
         </Col>
@@ -171,7 +94,7 @@ const Category = ({ history }) => {
             </div>
 
           </div>
-          <ProductCard bestDeals={bestDeals} gridXl={4} gridMd={4} gridLg={3} history={history} isGrid={true} />
+          <ProductCard bestDeals={product} gridXl={4} gridMd={4} gridLg={3} history={history} isGrid={true} />
         </Col>
       </Row>
 

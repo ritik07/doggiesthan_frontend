@@ -1,48 +1,58 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Row, Col } from 'reactstrap'
 import CoverImg from '../../pages/coverimg'
 import blog from '../../static/images/coverpic/blog.jpeg'
 import coverpic from '../../static/images/coverpic/coverpic.jpeg'
+import { useDispatch, useSelector } from 'react-redux'
+import { ImageUrl } from '../../lib/constant'
 
 const BlogsComp = () => {
+
+  const [data, setData] = useState([]);
+  const [allImages, setAllImages] = useState([]);
+
+  const allData = useSelector(state => state.allData);
+
+  useEffect(() => {
+    if (allData.blogData.length) {
+      setData(allData.blogData)
+      if (allData.blogData[0].images)
+        setAllImages(allData.blogData[0].images.split(','))
+    }
+  }, [allData])
+
   return (
-    <div>
+    data ?
       <div>
         <CoverImg coverName={"Blogs"} />
         <div className="cs-web-container">
-          <Row>
-            <Col xl={10} className="cs-bp-80">
-              <img src={blog} className="cs-w-100 frz-br-8" />
-              <div className="cs-font-instyle cs-font-32 cs-tp-10">
-                Tips and tricks: Puppy’s First Grooming
-              </div>
-              <div className="cs-tp-10 cs-lp-5">
-                July 10, 2019
-              </div>
+          <div>
+            {data.map((data, index) => {
+              return (
+                <Row>
+                  <Col xl={10} className="cs-bp-80">
+                    <img src={`${ImageUrl}/${data.images.split(',')[0]}`} className="cs-w-100 frz-br-8" />
+                    <div className="cs-font-instyle cs-font-32 cs-tp-10">
+                      {data.title}
+                    </div>
+                    <div className="cs-tp-10 cs-lp-5">
+                      {data.date}
+                    </div>
 
-              <div className="cs-tp-20 cs-font-20">
-                Collaboratively administrate empowered markets via plug-and-play networks. Dynamically procrastinate B2C users after installed base benefits. Dramatically visualize customer directed convergence without revolutionary ROI.
-                Completely synergize resource taxing relationships via premier niche markets professionally cultivate.
-              </div>
-            </Col>
-
-            <Col xl={10}>
-              <img src={coverpic} className="cs-w-100 frz-br-8" />
-              <div className="cs-font-instyle cs-font-32 cs-tp-10">
-                Cat Health – Keeping Them Purr-fect
-              </div>
-              <div className="cs-tp-10 cs-lp-5">
-                July 10, 2019
-              </div>
-
-              <div className="cs-tp-20 cs-font-20">
-                Holistically pontificate installed base portals after maintainable products. Phosfluorescently engage worldwide methodologies with technology. Dramatically engage top-line web services vis-a-vis for better cutting-edge deliverables. Proactively envisioned multimedia based expertise and cross-media growth.
-              </div>
-            </Col>
-          </Row>
+                    <div className="cs-tp-20 cs-font-20">
+                      {data.description}
+                    </div>
+                  </Col>
+                </Row>
+              )
+            })}
+          </div>
         </div>
       </div>
-    </div>
+      :
+      <div>
+        NO DATA FOUND
+      </div>
   )
 }
 

@@ -23,6 +23,16 @@ div{
   margin: 0px 70px;
 }
 
+.cs-pic-display{
+  width: 25em;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.cs-w-20{
+  width: 20%;
+}
+
 .cs-mobile-container{
   margin: 0px 6px;
 }

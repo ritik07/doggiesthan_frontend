@@ -1,69 +1,43 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import ProductCard from '../productcard'
-
 import Product1 from '../../static/images/products/product1.jpg'
 import Product2 from '../../static/images/products/product2.jpg'
 import Product3 from '../../static/images/products/product3.jpg'
 import Product4 from '../../static/images/products/product4.jpg'
+import { useDispatch, useSelector } from 'react-redux'
+import { ImageUrl } from '../../lib/constant'
 
 
-const FeaturedProduct = ({history}) => {
 
+const FeaturedProduct = ({ history }) => {
+  const [data, setData] = useState([]);
+  const [allImages, setAllImages] = useState([]);
 
+  const allData = useSelector(state => state.allData);
 
-  const bestDeals = [
-    {
-      img: Product1,
-      name: "Chew Ball",
-      descp: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus quo consequatur...",
-      mrp: 4500,
-      sp: 3500,
-      rating: 3.5,
-      category: "Toys"
-    },
-    {
-      img: Product2,
-      name: "Cookie Bones",
-      descp: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus quo consequatur...",
-      mrp: 25,
-      sp: 15,
-      rating: 3,
-      category: "Food"
-    },
-    {
-      img: Product3,
-      name: "Crate Mats",
-      descp: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus quo consequatur...",
-      mrp: 800,
-      sp: 550,
-      rating: 5,
-      category: "Beds"
-    },
-    {
-      img: Product4,
-      name: "Dry Food",
-      descp: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus quo consequatur...",
-      mrp: 999,
-      sp: 599,
-      rating: 3.5,
-      category: "Food"
+  useEffect(() => {
+    if (allData.products.length) {
+      let tempData = allData.products;
+      tempData = tempData.filter((e) => e.isBestDeal === "Yes")
+      setData(tempData)
+      if (allData.products[0].images)
+        setAllImages(allData.products[0].images.split(','))
     }
-  ]
+  }, [allData])
 
   return (
-    <div>
-
-      <div className="cs-web-container">
-        <div className="cs-tp-128">
-          <div className="cs-font-instyle cs-font-38 cs-bp-20">
-            Best Deals
+    data ?
+      <div>
+        <div className="cs-web-container">
+          <div className="cs-tp-128">
+            <div className="cs-font-instyle cs-font-38 cs-bp-20">
+              Best Deals
+            </div>
+          </div>
+          <ProductCard bestDeals={data} history={history} toMainProduct={true} />
         </div>
-        </div>
-
-        <ProductCard bestDeals={bestDeals} history={history}/>
-
       </div>
-    </div>
+      : null
   )
 }
 

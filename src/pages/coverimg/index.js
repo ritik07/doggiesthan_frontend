@@ -6,7 +6,7 @@ const CoverImg = ({coverName}) => {
   return (
     <div>
       <div>
-        <div className="cs-dis-flex cs-vt-center" style={{ backgroundImage: `url(${bgColor})`, height: "60vh" }}>
+        <div className="cs-dis-flex cs-vt-center" style={{ backgroundImage: `url(${bgColor})`, height: "40vh" }}>
           <div className="cs-font-45 cs-font-instyle cs-lm-40">
             {coverName}
           </div>

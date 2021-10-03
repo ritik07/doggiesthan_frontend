@@ -1,17 +1,42 @@
 import React from 'react'
 import { Row, Col } from 'reactstrap'
 import { Rate } from 'antd';
+import { ImageUrl } from '../../lib/constant'
+import ReactHtmlParser from 'react-html-parser';
+import AddToCart from '../addtocart';
 
 const ProductCardWeb = (props) => {
-  const { gridMd, gridXl, gridLg, history } = props
+  const { gridMd, gridXl, gridLg, history, noRating, noPrice, openCat, toMainProduct } = props
+
+
+  const handleOnProductSelect = (id) => {
+    // console.log("event", id)
+    if (id) {
+      history.push(`/product/${id}`)
+    }
+  }
+
+  const truncateString = (str, num) => {
+    // If the length of str is less than or equal to num
+    // just return str--don't truncate it.
+    if (str.length <= num) {
+      return str
+    }
+    // Return str truncated with '...' concatenated to the end of str.
+    return str.slice(0, num) + '...'
+  }
+
   return (
     <Row>
-      {props.bestDeals.map((data) => {
+      {props.bestDeals.map((data, index) => {
+        console.log("all data", props.bestDeals)
         return (
-          <Col xl={gridXl ? gridXl : 3} md={gridLg ? gridLg : 4} lg={gridMd ? gridMd : 3} className="cs-bp-30">
-            <div className="cs-product-card cs-pointer">
+          <Col key={index} xl={gridXl ? gridXl : 3} md={gridLg ? gridLg : 4} lg={gridMd ? gridMd : 3}
+            className="cs-bp-30">
+            <div className="cs-product-card">
               <div className="cs-dis-flex cs-hrz-center cs-vt-center">
-                <img src={data.img} className="cs-w-75" />
+                <img src={`${ImageUrl}/${data.images.split(',')[0]}`} className="cs-w-75 cs-pointer"
+                  onClick={toMainProduct ? (e) => handleOnProductSelect(data.id) : ""} />
               </div>
 
               {/* <div className="cs-divider-line" /> */}
@@ -25,35 +50,42 @@ const ProductCardWeb = (props) => {
                   </div>
 
                   <div className="cs-product-card-name cs-dis-flex cs-hrz-center cs-font-instyle cs-font-26 cs-pointer">
-                    {data.name}
+                    {data.title}
                   </div>
 
                   <div className="cs-product-card-descp cs-font-16 cs-pointer cs-dis-flex cs-hrz-center" style={{ textAlign: "center" }}>
-                    {data.descp}
+                    {/* <div dangerouslySetInnerHTML={{ __html: data.description }} /> */}
+                    <div> {ReactHtmlParser(truncateString(data.description, 120))} </div>
+                    {/* {data.description} */}
                   </div>
 
-                  <div className="cs-dis-flex cs-hrz-center cs-golden-star">
+                  {!noRating && <div className="cs-dis-flex cs-hrz-center cs-golden-star">
                     <Rate style={{ fontSize: 16 }} disabled defaultValue={data.rating} allowHalf />
-                  </div>
+                  </div>}
                 </div>
               </div>
 
-              <div className="cs-product-card-pricing-section">
+              {!noPrice && <div className="cs-product-card-pricing-section">
                 <div className="cs-dis-flex cs-hrz-center">
                   <div className="cs-product-card-mrp cs-rp-15">
                     ₹{data.mrp}.00
-                      </div>
+                  </div>
                   <div>
-                    ₹{data.sp}.00
-                      </div>
+                    ₹{data.price}.00
+                  </div>
                 </div>
-              </div>
-
-              <div className="cs-dis-flex cs-hrz-center cs-tp-15 cs-bp-20" onClick={()=>history.push("/cart")}>
-                <div className="cs-product-card-addtocart cs-pointer">
-                  Add to Cart
+              </div>}
+              {openCat ?
+                <div className="cs-dis-flex cs-hrz-center cs-tp-15 cs-bp-20" onClick={() => history.push("/category")}>
+                  <div className="cs-product-card-addtocart cs-pointer">
+                    View Category
+                  </div>
                 </div>
-              </div>
+                :
+                <div className="cs-dis-flex cs-hrz-center">
+                  <AddToCart history={history} productId={data.id} />
+                </div>
+              }
             </div>
           </Col>)
       })}

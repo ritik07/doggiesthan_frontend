@@ -25,6 +25,7 @@ import "slick-carousel/slick/slick-theme.css";
 import Category from "./pages/category";
 import { Cart } from "./pages/cart";
 import Checkout from "./pages/checkout";
+import { Spin } from 'antd'
 import Dogs from "./pages/dogs";
 import ScrollToTop from "./config/ScrollToTop";
 import Cats from "./pages/cat";
@@ -33,6 +34,27 @@ import Brands from "./pages/brands";
 import Exclusive from "./pages/exclusive";
 import Blogs from "./pages/blogs";
 import Rewards from "./pages/rewards";
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
+import { usePromiseTracker } from "react-promise-tracker";
+import ProductSingle from "./pages/productsingle";
+
+const LoadingIndicator = props => {
+  const { promiseInProgress } = usePromiseTracker();
+
+  return promiseInProgress &&
+    <div style={{
+      top: 0,
+      zIndex: 99999,
+      position: "absolute",
+      width: "100vw",
+      height: "100vh",
+      background: "#FFFFFF88"
+    }}>
+      <span style={{ position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%,-50%)' }} ><Spin size={'large'} /></span>
+    </div>;
+}
+
 
 const App = () => {
   return (
@@ -47,17 +69,21 @@ const App = () => {
             <PublicRoute path="/sign-up" component={SignUp} />
             <PublicRoute path="/cart" component={Cart} />
             <PublicRoute path="/checkout" component={Checkout} />
-            <PublicRoute path="/dogs" component={Dogs} />
-            <PublicRoute path="/cats" component={Cats} />
+            <PublicRoute path="/product/:id" component={ProductSingle} />
+            <PublicRoute path="/:category/:id" component={Dogs} />
             <PublicRoute path="/bestdeals" component={TodayDeal} />
             <PublicRoute path="/brands" component={Brands} />
             <PublicRoute path="/exclusive" component={Exclusive} />
             <PublicRoute path="/blogs" component={Blogs} />
             <PublicRoute path="/rewards" component={Rewards} />
+            <PublicRoute path="/login" component={Login} />
             <Redirect from="/" to="/home/" />
           </Switch>
         </Router>
       </Provider>
+      <ToastContainer autoClose={3200} />
+
+      <LoadingIndicator />
     </div>
   );
 };

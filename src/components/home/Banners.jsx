@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Row, Col } from 'reactstrap'
 import Slider from "react-slick";
 //local imports
@@ -7,8 +7,22 @@ import sliderimg from '../../static/images/slider/sliderimg.png'
 import sliderimg1 from '../../static/images/slider/sldierimg1.jpg'
 import sliderimg2 from '../../static/images/slider/sliderimg2.jpg'
 import HeroPrices from '../../static/images/slider/hero_prices.png'
+import { useDispatch, useSelector } from 'react-redux'
+import { ImageUrl } from '../../lib/constant'
 
 const Banners = () => {
+  const [data, setData] = useState([]);
+  const [allImages, setAllImages] = useState([]);
+
+  const allData = useSelector(state => state.allData);
+
+  useEffect(() => {
+    if (allData.headerBanner.length) {
+      setData(allData.headerBanner)
+      if (allData.headerBanner[0].images)
+        setAllImages(allData.headerBanner[0].images.split(','))
+    }
+  }, [allData])
 
   const settings = {
     dots: true,
@@ -25,7 +39,21 @@ const Banners = () => {
         <Col xl={5}>
           <div className="cs-web-container cs-tp-60">
             <Slider {...settings}>
-              <div>
+              {data.map((data, index) => {
+                if (index > 0) {
+                  return (
+                    <div key={index}>
+                      <div>
+                        {data.title}
+                      </div>
+                      <div className="cs-font-instyle cs-font-50 cs-tm-20">
+                        {data.descp}
+                      </div>
+                    </div>
+                  )
+                }
+              })}
+              {/* <div>
                 <div>
                   LOYALTY PROGRAMS
                 </div>
@@ -53,13 +81,13 @@ const Banners = () => {
                 <div className="cs-font-instyle cs-font-50 cs-tm-20">
                   Order above 1999/- and get free hostel service for 3 days
                 </div>
-              </div>
+              </div> */}
             </Slider>
           </div>
         </Col>
 
         <Col xl={7}>
-          <img src={HeroPrices} className="cs-w-100" />
+          <img src={`${ImageUrl}/${allImages[0]}`} className="cs-w-100" />
         </Col>
       </Row>
     </div>
