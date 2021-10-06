@@ -4,17 +4,11 @@ import Slider from "react-slick";
 import { Rate } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons'
-
-//
-
-import Product1 from '../../static/images/products/product1.jpg'
-import Product2 from '../../static/images/products/product2.jpg'
-import Product3 from '../../static/images/products/product3.jpg'
-import Product4 from '../../static/images/products/product4.jpg'
-
+import { ImageUrl } from '../../lib/constant'
+import AddToCart from '../addtocart';
 
 const ProductCardMobile = (props) => {
-
+  const { gridMd, gridXl, gridLg, history, noRating, noPrice, openCat, toMainProduct, isBrand } = props
   // const SamplePrevArrow = (props) => {
   //   return (
   //     <FontAwesomeIcon icon={faArrowLeft} style={{ ...style, display: "block", background: "green" }} />
@@ -40,6 +34,13 @@ const ProductCardMobile = (props) => {
     // prevArrow: <SamplePrevArrow />,
   };
 
+
+  const handleOnProductSelect = (id) => {
+    if (id) {
+      history.push(`/product/${id}`)
+    }
+  }
+
   return (
     <div>
       {props.isGrid ?
@@ -49,7 +50,8 @@ const ProductCardMobile = (props) => {
               <Col sm={6} xs={6} className="cs-bp-25">
                 <div className="cs-product-card cs-pointer">
                   <div className="cs-dis-flex cs-hrz-center cs-vt-center">
-                    <img src={data.img} className="cs-w-75" />
+                    <img src={`${ImageUrl}/${data.images.split(',')[0]}`} className="cs-w-100 cs-pointer"
+                      onClick={toMainProduct ? (e) => handleOnProductSelect(data.id) : ""} style={{ height: 140 }} />
                   </div>
 
                   {/* <div className="cs-divider-line" /> */}
@@ -72,22 +74,34 @@ const ProductCardMobile = (props) => {
                     </div>
                   </div>
 
-                  <div className="cs-product-card-pricing-section">
+                  {!noPrice ? <div className="cs-product-card-pricing-section">
                     <div className="cs-dis-flex cs-hrz-center">
                       <div className="cs-product-card-mrp cs-rp-15">
                         ₹{data.mrp}
                       </div>
                       <div>
-                        ₹{data.sp}
+                        ₹{data.price}
                       </div>
                     </div>
-                  </div>
+                  </div> : null}
 
-                  <div className="cs-dis-flex cs-hrz-center cs-tp-15 cs-bp-20">
-                    <div className="cs-product-card-addtocart cs-pointer">
-                      Add to Cart
+                  {openCat ?
+                    <div className="cs-dis-flex cs-hrz-center cs-tp-15 cs-bp-20" onClick={() => history.push("/category")}>
+                      <div className="cs-product-card-addtocart cs-pointer">
+                        View Category
+                      </div>
                     </div>
-                  </div>
+                    : isBrand ? <div className="cs-dis-flex cs-hrz-center cs-tp-15 cs-bp-20" onClick={() => history.push(`/brand/allproducts/${data.id}`)}>
+                      <div className="cs-product-card-addtocart cs-pointer">
+                        View All Products
+                      </div>
+                    </div> :
+                      <div className="cs-dis-flex cs-hrz-center cs-tp-15 cs-bp-20">
+                        <AddToCart history={history} productId={data.id} />
+                        {/* <div className="cs-product-card-addtocart cs-pointer">
+                        Add to Cart
+                      </div> */}
+                      </div>}
                 </div>
               </Col>
             )
@@ -100,7 +114,8 @@ const ProductCardMobile = (props) => {
                 return (
                   <div className="cs-product-card cs-pointer">
                     <div className="cs-dis-flex cs-hrz-center cs-vt-center">
-                      <img src={data.img} className="cs-w-75" />
+                      <img src={`${ImageUrl}/${data.images.split(',')[0]}`} className="cs-w-100 cs-pointer"
+                        onClick={toMainProduct ? (e) => handleOnProductSelect(data.id) : ""} style={{ height: 140 }} />
                     </div>
 
                     {/* <div className="cs-divider-line" /> */}
@@ -114,31 +129,50 @@ const ProductCardMobile = (props) => {
                         </div>
 
                         <div className="cs-product-card-name cs-font-instyle cs-product-card-prod-name-txt cs-pointer cs-cs-lh-32">
-                          {data.name}
+                          {openCat || isBrand ? data.title : data.name}
                         </div>
 
-                        <div className="cs-golden-star">
-                          <Rate className="cs-product-card-rate" disabled defaultValue={data.rating} allowHalf />
-                        </div>
+                        {data.brandData && data.brandData.length ?
+                          <div className="cs-product-card-name cs-dis-flex cs-hrz-center cs-font-12 cs-tp-10 cs-pointer">
+                            ( A product by {data.brandData[0].title} )
+                          </div>
+                          : null}
+
+                        {!noRating &&
+                          <div className="cs-golden-star">
+                            <Rate className="cs-product-card-rate" disabled defaultValue={data.rating} allowHalf />
+                          </div>}
                       </div>
                     </div>
 
-                    <div className="cs-product-card-pricing-section">
+                    {!noPrice ? <div className="cs-product-card-pricing-section">
                       <div className="cs-dis-flex cs-hrz-center">
                         <div className="cs-product-card-mrp cs-rp-15">
                           ₹{data.mrp}
                         </div>
                         <div>
-                          ₹{data.sp}
+                          ₹{data.price}
                         </div>
                       </div>
-                    </div>
+                    </div> : null}
 
-                    <div className="cs-dis-flex cs-hrz-center cs-tp-15 cs-bp-20">
-                      <div className="cs-product-card-addtocart cs-pointer">
-                        Add to Cart
+                    {openCat ?
+                      <div className="cs-dis-flex cs-hrz-center cs-tp-15 cs-bp-20" onClick={() => history.push("/category")}>
+                        <div className="cs-product-card-addtocart cs-pointer">
+                          View Category
+                        </div>
                       </div>
-                    </div>
+                      : isBrand ? <div className="cs-dis-flex cs-hrz-center cs-tp-15 cs-bp-20" onClick={() => history.push(`/brand/allproducts/${data.id}`)}>
+                        <div className="cs-product-card-addtocart cs-pointer">
+                          View All Products
+                        </div>
+                      </div> :
+                        <div className="cs-dis-flex cs-hrz-center cs-tp-15 cs-bp-20">
+                          <AddToCart history={history} productId={data.id} />
+                          {/* <div className="cs-product-card-addtocart cs-pointer">
+                        Add to Cart
+                      </div> */}
+                        </div>}
                   </div>
                 )
               })}

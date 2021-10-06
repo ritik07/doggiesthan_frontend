@@ -1,27 +1,25 @@
 import React, { useEffect, useState } from 'react'
 import ProductCard from '../productcard'
-import Product1 from '../../static/images/products/product1.jpg'
-import Product2 from '../../static/images/products/product2.jpg'
-import Product3 from '../../static/images/products/product3.jpg'
-import Product4 from '../../static/images/products/product4.jpg'
 import { useDispatch, useSelector } from 'react-redux'
-import { ImageUrl } from '../../lib/constant'
-
-
 
 const FeaturedProduct = ({ history }) => {
   const [data, setData] = useState([]);
-  const [allImages, setAllImages] = useState([]);
 
   const allData = useSelector(state => state.allData);
 
   useEffect(() => {
     if (allData.products.length) {
-      let tempData = allData.products;
-      tempData = tempData.filter((e) => e.isBestDeal === "Yes")
+      let tempData = false
+      tempData = allData.products.filter((e) => e.isBestDeal === "Yes").map((data) => {
+        if (allData.subCategory.length) {
+          if (allData.brand.length) {
+            return Object.assign({}, data, { brandData: allData.brand.filter((filterBranddata) => filterBranddata.id == data.brandId) },
+              { subcat: allData.subCategory.filter((filterdata) => filterdata.id === data.subMasterId) })
+          }
+        }
+      })
+      // console.log("tempData", tempData)
       setData(tempData)
-      if (allData.products[0].images)
-        setAllImages(allData.products[0].images.split(','))
     }
   }, [allData])
 

@@ -2,14 +2,24 @@ import React, { useEffect, useState } from 'react'
 import { Row, Col } from 'reactstrap'
 import { HomeOutlined, ShoppingOutlined, GiftOutlined, ShoppingCartOutlined } from '@ant-design/icons'
 import { Badge } from 'antd'
+import { useDispatch, useSelector } from 'react-redux'
 
 const MobileFooter = ({ history }) => {
 
   const [acive, setAcive] = useState("home")
+  const [totalCartItem, setTotalCartItem] = useState(false)
 
   useEffect(() => {
     getActiveBar()
   }, [acive])
+
+  const allData = useSelector(state => state.allData);
+
+  useEffect(() => {
+    if (allData.userCart.length) {
+      setTotalCartItem(allData.userCart.length)
+    }
+  }, [allData])
 
   const getActiveBar = () => {
     // setAcive()
@@ -34,7 +44,7 @@ const MobileFooter = ({ history }) => {
           </Col>
 
           <Col xs={3} className="cs-dis-flex cs-hrz-center">
-            <Badge count={5} style={{ backgroundColor: "#37bead" }} offset={[0, 0]}>
+            <Badge count={totalCartItem} style={{ backgroundColor: "#37bead" }} offset={[0, 0]}>
               <ShoppingCartOutlined style={{ fontSize: 24, color: acive === "cart" ? "#129b88" : "" }} onClick={() => history.push("/cart")} />
             </Badge>
           </Col>

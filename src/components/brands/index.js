@@ -10,15 +10,12 @@ import { ImageUrl } from '../../lib/constant'
 
 const BrandsComp = ({ history }) => {
   const [data, setData] = useState([]);
-  const [allImages, setAllImages] = useState([]);
 
   const allData = useSelector(state => state.allData);
 
   useEffect(() => {
     if (allData.brand.length) {
       setData(allData.brand)
-      if (allData.brand[0].images)
-        setAllImages(allData.brand[0].images.split(','))
     }
   }, [allData])
 
@@ -29,9 +26,7 @@ const BrandsComp = ({ history }) => {
           <CoverImg coverName={"Shop with world's top most brands"} />
         </div>
         <div className="cs-web-container">
-
-          <ProductCard bestDeals={data} history={history} noPrice={true} noRating={true} openCat={true} />
-
+          <ProductCard bestDeals={data} history={history} noPrice={true} noRating={true} isBrand={true} />
         </div>
       </div>
       : <div>

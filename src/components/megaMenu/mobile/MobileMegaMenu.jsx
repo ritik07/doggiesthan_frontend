@@ -5,7 +5,7 @@ const { SubMenu } = Menu
 
 const getFormobile = () => {
     const handleClick = e => {
-      console.log('click ', e);
+      // console.log('click ', e);
     };
     return (
       <Menu

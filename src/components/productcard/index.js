@@ -3,17 +3,18 @@ import ProductCardWeb from './ProductCardWeb';
 import ProductCardMobile from './ProductCardMobile';
 
 const ProductCard = (props) => {
-  const { gridXl, gridMd, gridLg, history, isGrid, noPrice, noRating, openCat, toMainProduct } = props
+  const { gridXl, gridMd, gridLg, history, isGrid, noPrice, noRating, openCat, toMainProduct, isBrand } = props
   return (
     <div>
       <div className="cs-show-web">
         <ProductCardWeb history={history} gridXl={gridXl} gridMd={gridMd}
           ridLg={gridLg} bestDeals={props.bestDeals} noPrice={noPrice} noRating={noRating}
-          openCat={openCat} toMainProduct={toMainProduct}/>
+          openCat={openCat} toMainProduct={toMainProduct} isBrand={isBrand} />
       </div>
 
       <div className="cs-show-mobile">
-        <ProductCardMobile bestDeals={props.bestDeals} isGrid={isGrid} />
+        <ProductCardMobile bestDeals={props.bestDeals} isGrid={isGrid} noPrice={noPrice} noRating={noRating}
+          openCat={openCat} toMainProduct={toMainProduct} isBrand={isBrand} />
       </div>
     </div>
   )

@@ -49,7 +49,7 @@ const CartTable = ({ history }) => {
 
   useEffect(() => {
     getTableData()
-  }, [allData])
+  }, [allData, allData.userCart])
 
   useEffect(() => {
     if (data) {
@@ -62,9 +62,11 @@ const CartTable = ({ history }) => {
     data.map((data) => {
       tempTotal.push(data.subtotal)
     })
-    const reducer = (previousValue, currentValue) => previousValue + currentValue;
-    let finalTotal = tempTotal.reduce(reducer)
-    setSubTotal(finalTotal)
+    if (tempTotal.length) {
+      const reducer = (previousValue, currentValue) => previousValue + currentValue;
+      let finalTotal = tempTotal.reduce(reducer)
+      setSubTotal(finalTotal)
+    }
 
   }
 
@@ -83,7 +85,10 @@ const CartTable = ({ history }) => {
           })
         })
       }
-      setData(tempProduct)
+      setData([...tempProduct])
+    }else{
+
+      setData([])
     }
   }
 

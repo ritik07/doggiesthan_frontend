@@ -6,6 +6,9 @@ import "./style.css";
 import Reward from '../../static/images/icons/reward.png'
 import logo from '../../static/images/icons/logo.jpeg'
 import { useDispatch, useSelector } from 'react-redux'
+import { faTimes } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 
 const { SubMenu } = Menu;
 
@@ -22,6 +25,7 @@ export const WebHeader = ({ history }) => {
 
   const [data, setData] = useState([]);
   const [totalCartItem, setTotalCartItem] = useState(false)
+  const [isSearch, setIsSearch] = useState(false)
 
   const allData = useSelector(state => state.allData);
 
@@ -32,7 +36,7 @@ export const WebHeader = ({ history }) => {
     if (allData.userCart.length) {
       setTotalCartItem(allData.userCart.length)
     }
-  }, [allData])
+  }, [allData, data])
 
   const [searchText, setSearchText] = useState("")
   const [isFocus, setIsFocus] = useState(false)
@@ -59,14 +63,44 @@ export const WebHeader = ({ history }) => {
 
   const onSearch = value => console.log(value);
 
+  const handleOnSearch = (value) => {
+    if (value) {
+      history.push('/search')
+    } else {
+      history.push("/")
+    }
+  }
+
+  useEffect(() => {
+    if (searchText.length > 0) {
+      history.push({
+        pathname: '/search',
+        search: searchText,
+        state: { text: searchText }
+      })
+    }
+  }, [searchText])
+
+  const handleOnSearchText = (e) => {
+    setSearchText(e.target.value)
+  }
+
   return (
     <div className="cs-web-container">
-      {console.log("data", data)}
       <div className="cs-web-navbar">
-        <Row>
+        {window.location.pathname.split('/')[1] === "search" ? <Row>
+          <Col xl={11}>
+            <Input autoFocus size="large" placeholder="Search Products" style={{ width: "100%" }}
+              // onBlur={() => handleOnSearch(false)}
+              onChange={(e) => handleOnSearchText(e)} />
+          </Col>
+          <Col xl={1} className="cs-dis-flex cs-vt-center cs-pointer" onClick={() => handleOnSearch(false)}>
+            <FontAwesomeIcon icon={faTimes} />
+          </Col>
+        </Row> : <Row>
           <Col xl={1} lg={1} md={1} className="cs-vt-center cs-dis-flex">
             {/* <div className="cs-font-instyle cs-font-26">Doggiesthan</div> */}
-            <SearchOutlined style={{ fontSize: 22 }} />
+            <SearchOutlined style={{ fontSize: 22 }} autoFocus={true} onClick={() => handleOnSearch(true)} />
           </Col>
 
           {data.map((data, index) => {
@@ -166,7 +200,7 @@ export const WebHeader = ({ history }) => {
 
             </Row>
           </Col>
-        </Row>
+        </Row>}
       </div>
     </div>);
 };

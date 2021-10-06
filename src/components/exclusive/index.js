@@ -1,96 +1,42 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import CoverImg from '../../pages/coverimg'
-import Product1 from '../../static/images/products/product1.jpg'
-import Product2 from '../../static/images/products/product2.jpg'
-import Product3 from '../../static/images/products/product3.jpg'
-import Product4 from '../../static/images/products/product4.jpg'
-import ProductCard from '../productcard'
+import { useDispatch, useSelector } from 'react-redux'
+import ProductCard from '../productcard';
 
 const ExclusiveComp = ({ history }) => {
-  const bestDeals = [
-    {
-      img: Product1,
-      name: "Chew Ball",
-      descp: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus quo consequatur...",
-      mrp: 4500,
-      sp: 3500,
-      rating: 3.5,
-      category: "Toys"
-    },
-    {
-      img: Product2,
-      name: "Cookie Bones",
-      descp: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus quo consequatur...",
-      mrp: 25,
-      sp: 15,
-      rating: 3,
-      category: "Food"
-    },
-    {
-      img: Product3,
-      name: "Crate Mats",
-      descp: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus quo consequatur...",
-      mrp: 800,
-      sp: 550,
-      rating: 5,
-      category: "Beds"
-    },
-    {
-      img: Product4,
-      name: "Dry Food",
-      descp: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus quo consequatur...",
-      mrp: 999,
-      sp: 599,
-      rating: 3.5,
-      category: "Food"
-    },
-    {
-      img: Product1,
-      name: "Chew Ball",
-      descp: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus quo consequatur...",
-      mrp: 4500,
-      sp: 3500,
-      rating: 3.5,
-      category: "Toys"
-    },
-    {
-      img: Product2,
-      name: "Cookie Bones",
-      descp: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus quo consequatur...",
-      mrp: 25,
-      sp: 15,
-      rating: 3,
-      category: "Food"
-    },
-    {
-      img: Product3,
-      name: "Crate Mats",
-      descp: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus quo consequatur...",
-      mrp: 800,
-      sp: 550,
-      rating: 5,
-      category: "Beds"
-    },
-    {
-      img: Product4,
-      name: "Dry Food",
-      descp: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus quo consequatur...",
-      mrp: 999,
-      sp: 599,
-      rating: 3.5,
-      category: "Food"
+  const [data, setData] = useState([]);
+
+  const allData = useSelector(state => state.allData);
+  let allBrandId = window.location.pathname.split("/")[3]
+  useEffect(() => {
+    if (allData.products.length) {
+      let tempData = false
+      tempData = allData.brand.filter((e) => e.title === "Exclusive").map((data) => {
+        if (allData.subCategory.length) {
+          if (allData.brand.length) {
+            return Object.assign({}, data, { brandData: allData.brand.filter((filterBranddata) => filterBranddata.id == data.brandId) },
+              { subcat: allData.subCategory.filter((filterdata) => filterdata.id === data.subMasterId) })
+            // return Object.assign({}, data, { subcat: allData.subCategory.filter((filterdata) => filterdata.id === data.subMasterId) })
+          }
+        }
+
+      })
+      // console.log("tempData exclusive", tempData)
+      setData(tempData)
     }
-  ]
+  }, [allData])
 
   return (
-    <div>
+    data ?
       <div>
-        <CoverImg coverName={"Exclusive products only on Doggiesthan"} />
+        <div>
+          <CoverImg coverName={"Exclusive products only on Doggiesthan"} />
+        </div>
+        <div className="cs-web-container">
+          <ProductCard bestDeals={data} history={history} noPrice={true} noRating={true} isBrand={true} />
+        </div>
       </div>
-      <div className="cs-web-container">
-        <ProductCard bestDeals={bestDeals} history={history} />
-      </div>
-    </div>
+      : <div></div>
   )
 }
 

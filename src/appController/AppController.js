@@ -19,6 +19,7 @@ const { Content } = Layout;
 export const AppController = ({ history, children }) => {
   const [top, setTop] = useState(0);
   const [collapsed, setcollapsed] = useState(true);
+  const [searchPage, setSearchPage] = useState(false)
 
   const dispatch = useDispatch();
   const allData = useSelector(state => state.allData);
@@ -32,7 +33,7 @@ export const AppController = ({ history, children }) => {
   };
 
   const init = async () => {
-    console.log("render")
+    // console.log("render")
 
     let ip = await getClientIp()
     dispatch(updateUserCartAction(ip))
@@ -50,6 +51,10 @@ export const AppController = ({ history, children }) => {
   useEffect(() => {
     init()
   }, [])
+
+  const handleOnSearchPageChange = (value) => {
+    setSearchPage(value)
+  }
 
   // useEffect(() => {
   //   if (allData) {

@@ -38,6 +38,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 import { usePromiseTracker } from "react-promise-tracker";
 import ProductSingle from "./pages/productsingle";
+import AllBrands from "./pages/allbrands";
+import SearchPage from "./pages/search";
 
 const LoadingIndicator = props => {
   const { promiseInProgress } = usePromiseTracker();
@@ -48,10 +50,12 @@ const LoadingIndicator = props => {
       zIndex: 99999,
       position: "absolute",
       width: "100vw",
-      height: "100vh",
+      height: "1000px",
       background: "#FFFFFF88"
     }}>
-      <span style={{ position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%,-50%)' }} ><Spin size={'large'} /></span>
+      <span style={{ position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%,-50%)' }} >
+        <Spin size={'large'} />
+      </span>
     </div>;
 }
 
@@ -70,12 +74,14 @@ const App = () => {
             <PublicRoute path="/cart" component={Cart} />
             <PublicRoute path="/checkout" component={Checkout} />
             <PublicRoute path="/product/:id" component={ProductSingle} />
+            <PublicRoute path="/brand/allproducts/:id" component={AllBrands} />
             <PublicRoute path="/:category/:id" component={Dogs} />
             <PublicRoute path="/bestdeals" component={TodayDeal} />
             <PublicRoute path="/brands" component={Brands} />
             <PublicRoute path="/exclusive" component={Exclusive} />
             <PublicRoute path="/blogs" component={Blogs} />
             <PublicRoute path="/rewards" component={Rewards} />
+            <PublicRoute path="/search" component={SearchPage} />
             <PublicRoute path="/login" component={Login} />
             <Redirect from="/" to="/home/" />
           </Switch>

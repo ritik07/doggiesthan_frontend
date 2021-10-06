@@ -21,20 +21,20 @@ const AddToCart = ({ history, productId }) => {
       if (allData.userCart.filter(data => data.productId === productId)[0]) {
         setData(allData.userCart.filter(data => data.productId === productId)[0]["quantity"])
         setId(allData.userCart.filter(data => data.productId === productId)[0]["id"])
-
+      }else{
+        setId(null)
+        setData(0)      
       }
+    }
+    else{
+      setId(null)
+      setData(0)
     }
   }
 
   useEffect(() => {
     init()
-  }, [])
-
-  useEffect(() => {
-    if (allData.userCart.length) {
-      init()
-    }
-  }, [allData])
+  }, [allData, allData.userCart, productId])
 
   const addTo = async (positive) => {
     let ip = await getClientIp();

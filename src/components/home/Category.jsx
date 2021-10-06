@@ -10,57 +10,14 @@ import { ImageUrl } from '../../lib/constant'
 
 const Category = ({ history }) => {
   const [data, setData] = useState([]);
-  const [allImages, setAllImages] = useState([]);
 
   const allData = useSelector(state => state.allData);
 
   useEffect(() => {
     if (allData.subCategory.length) {
       setData(allData.subCategory)
-      if (allData.subCategory[0].images)
-        setAllImages(allData.subCategory[0].images.split(','))
     }
   }, [allData])
-
-
-  const bestDeals = [
-    {
-      img: Product1,
-      name: "Chew Ball",
-      descp: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus quo consequatur...",
-      mrp: 4500,
-      sp: 3500,
-      rating: 3.5,
-      category: "Toys"
-    },
-    {
-      img: Product2,
-      name: "Cookie Bones",
-      descp: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus quo consequatur...",
-      mrp: 25,
-      sp: 15,
-      rating: 3,
-      category: "Food"
-    },
-    {
-      img: Product3,
-      name: "Crate Mats",
-      descp: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus quo consequatur...",
-      mrp: 800,
-      sp: 550,
-      rating: 5,
-      category: "Beds"
-    },
-    {
-      img: Product4,
-      name: "Dry Food",
-      descp: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus quo consequatur...",
-      mrp: 999,
-      sp: 599,
-      rating: 3.5,
-      category: "Food"
-    }
-  ]
 
   return (
     allData.subCategory.length &&
@@ -75,9 +32,7 @@ const Category = ({ history }) => {
             See All
           </div>
         </div>
-
         <ProductCard bestDeals={data} history={history} noPrice={true} noRating={true} openCat={true} />
-
       </div>
     </div>
   )

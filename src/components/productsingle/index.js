@@ -1,19 +1,26 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { ImageUrl } from '../../lib/constant'
 import { Row, Col } from 'reactstrap'
 import { Rate } from 'antd';
 import ReactHtmlParser from 'react-html-parser';
 import AddToCart from '../addtocart';
+import { Image } from 'antd';
+import ImageViewer from "react-simple-image-viewer";
+import InnerImageZoom from 'react-inner-image-zoom';
 
 const ProductSingleComp = ({ history }) => {
   const [data, setData] = useState(false);
   const [allImages, setAllImages] = useState([]);
   const [catName, setCatName] = useState(false)
   const allData = useSelector(state => state.allData);
+  const [currentImage, setCurrentImage] = useState(0);
+  const [isViewerOpen, setIsViewerOpen] = useState(false);
+
+  const [mainImg, setMainImg] = useState(false)
 
   let prodid = window.location.pathname.split('/')[2]
-
+  let subImages = []
   useEffect(() => {
     if (allData.products.length) {
       let tempData = allData.products;
@@ -21,6 +28,7 @@ const ProductSingleComp = ({ history }) => {
       setData(tempData)
       // console.log("tempData", tempData)
       if (tempData[0].images) {
+        setMainImg(tempData[0].images.split(',')[0])
         setAllImages(tempData[0].images.split(','))
       }
     }
@@ -34,12 +42,25 @@ const ProductSingleComp = ({ history }) => {
 
   const getSubCategory = () => {
     let tempData = allData.subCategory;
-    console.log(" tempData ..", tempData)
+    // console.log(" tempData ..", tempData)
     tempData = tempData.filter((e) => e.id === data[0].parent_id)
     setCatName(tempData)
   }
 
+  const handleOnMainImg = (imagesrc) => {
+    setMainImg(imagesrc)
+  }
 
+
+  const openImageViewer = useCallback((index) => {
+    setCurrentImage(index);
+    setIsViewerOpen(true);
+  }, []);
+
+  const closeImageViewer = () => {
+    setCurrentImage(0);
+    setIsViewerOpen(false);
+  };
 
   return (
     data &&
@@ -50,15 +71,16 @@ const ProductSingleComp = ({ history }) => {
           <Col xl={4} xs={12}>
             <Row>
               <Col xl={12} xs={12} className="cs-dis-flex cs-hrz-center">
-                <img src={`${ImageUrl}/${allImages[0]}`} className="cs-w-80" />
+                <InnerImageZoom width={500} zoomScale={2} zoomSrc={`${ImageUrl}/${mainImg}`} src={`${ImageUrl}/${mainImg}`} className="cs-w-100" />
               </Col>
             </Row>
 
             <div className="cs-pic-display cs-lp-30">
               {allImages.map((data, index) => {
+                subImages.push(`${ImageUrl}/${data}`)
                 if (index > 0 && index < data.length) {
                   return (
-                    <img style={{ width: 80, height: 80 }} src={`${ImageUrl}/${data}`} />
+                    <img onClick={()=>handleOnMainImg(data)} style={{ width: 80, height: 80 }} src={`${ImageUrl}/${data}`} />
                   )
                 }
               })}
@@ -108,7 +130,18 @@ const ProductSingleComp = ({ history }) => {
           </Col>
         </Row> */}
       </div>
-
+      {isViewerOpen && (
+        <ImageViewer
+          src={subImages}
+          currentIndex={currentImage}
+          onClose={closeImageViewer}
+          disableScroll={false}
+          backgroundStyle={{
+            backgroundColor: "rgba(0,0,0,0.9)"
+          }}
+          closeOnClickOutside={true}
+        />
+      )}
     </div>
   )
 }
