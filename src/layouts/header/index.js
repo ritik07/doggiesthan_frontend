@@ -51,7 +51,7 @@ const Header = ({ history }) => {
       </div>
 
       <div className="cs-show-mobile">
-        <MobileHeader />
+        <MobileHeader history={history}/>
       </div>
 
     </div>

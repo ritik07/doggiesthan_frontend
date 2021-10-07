@@ -44,14 +44,14 @@ const ProductCardMobile = (props) => {
   return (
     <div>
       {props.isGrid ?
-        <Row>
+        <Row className="cs-tp-20">
           {props.bestDeals.map((data) => {
             return (
               <Col sm={6} xs={6} className="cs-bp-25">
                 <div className="cs-product-card cs-pointer">
                   <div className="cs-dis-flex cs-hrz-center cs-vt-center">
                     <img src={`${ImageUrl}/${data.images.split(',')[0]}`} className="cs-w-100 cs-pointer"
-                      onClick={toMainProduct ? (e) => handleOnProductSelect(data.id) : ""} style={{ height: 140 }} />
+                      onClick={toMainProduct ? (e) => handleOnProductSelect(data.id) : openCat ? (e) => history.push("/category") : (e) => handleOnProductSelect(data.id)} style={{ height: 140 }} />
                   </div>
 
                   {/* <div className="cs-divider-line" /> */}

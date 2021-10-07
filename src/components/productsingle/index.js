@@ -8,6 +8,8 @@ import AddToCart from '../addtocart';
 import { Image } from 'antd';
 import ImageViewer from "react-simple-image-viewer";
 import InnerImageZoom from 'react-inner-image-zoom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 const ProductSingleComp = ({ history }) => {
   const [data, setData] = useState(false);
@@ -65,6 +67,11 @@ const ProductSingleComp = ({ history }) => {
   return (
     data &&
     <div className="cs-web-container cs-tp-30 cs-bp-100">
+      <div className="cs-show-mobile">
+        <div className="cs-tp-40" onClick={() => history.goBack()}>
+          <FontAwesomeIcon icon={faArrowLeft} className="cs-font-24" />
+        </div>
+      </div>
       <div className="cs-rp-40 cs-lp-30 cs-tp-30">
         <Row>
           {console.log("object", allImages)}
@@ -80,7 +87,7 @@ const ProductSingleComp = ({ history }) => {
                 subImages.push(`${ImageUrl}/${data}`)
                 if (index > 0 && index < data.length) {
                   return (
-                    <img onClick={()=>handleOnMainImg(data)} style={{ width: 80, height: 80 }} src={`${ImageUrl}/${data}`} />
+                    <img onClick={() => handleOnMainImg(data)} style={{ width: 80, height: 80 }} src={`${ImageUrl}/${data}`} />
                   )
                 }
               })}

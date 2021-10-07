@@ -35,7 +35,7 @@ const ProductCardWeb = (props) => {
             <div className="cs-product-card">
               <div className="cs-dis-flex cs-vt-center">
                 <img src={`${ImageUrl}/${data.images.split(',')[0]}`} className="cs-w-100 cs-pointer"
-                  onClick={toMainProduct ? (e) => handleOnProductSelect(data.id) : ""} style={{ height: 280 }} />
+                  onClick={toMainProduct ? (e) => handleOnProductSelect(data.id) : openCat ? (e) => history.push("/category") : (e) => handleOnProductSelect(data.id)} style={{ height: 300 }} />
               </div>
 
               {/* <div className="cs-divider-line" /> */}
@@ -43,7 +43,7 @@ const ProductCardWeb = (props) => {
               <div className="cs-product-card-info cs-dis-flex cs-hrz-center">
                 <div>
                   {!openCat && data.subcat && data.subcat.length ?
-                    < div className="cs-dis-flex cs-hrz-center">
+                    <div className="cs-dis-flex cs-hrz-center">
                       <div className="cs-font-caps cs-clr-cream cs-font-14 cs-pointer">
                         {data.subcat[0].title}
                       </div>

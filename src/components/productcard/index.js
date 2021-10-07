@@ -13,7 +13,7 @@ const ProductCard = (props) => {
       </div>
 
       <div className="cs-show-mobile">
-        <ProductCardMobile bestDeals={props.bestDeals} isGrid={isGrid} noPrice={noPrice} noRating={noRating}
+        <ProductCardMobile history={history} bestDeals={props.bestDeals} isGrid={isGrid} noPrice={noPrice} noRating={noRating}
           openCat={openCat} toMainProduct={toMainProduct} isBrand={isBrand} />
       </div>
     </div>
